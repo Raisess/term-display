@@ -2,13 +2,25 @@ import validatePlace from "./utils/validatePlace";
 import { IPlace } from "./interfaces/IPlace";
 
 export default class Display {
+	// Display memory and display previous memory state.
 	private display:       Array<Array<string>> = [];
 	private previousState: Array<Array<string>> = [];
-	
-	private x:          number = 50;
-	private y:          number = 50;
+
+	// Display size.
+	private x: number = 50;
+	private y: number = 50;
+	// No set pixel mark.
 	private whiteSpace: string = "x";
 
+	/**
+	 * @param: {
+	 *  size: {              // Size of display.
+	 *  	x: number;
+	 *  	y: number;
+	 *  },
+	 *  whiteSpace?: string; // White space mark (optional).
+	 * }
+	 */
 	constructor(size: IPlace, whiteSpace?: string) {
 		this.x          = size.x;
 		this.y          = size.y;
@@ -17,12 +29,14 @@ export default class Display {
 		this.clear();
 	}
 
+	// Show display.
 	public show(): void {
 		for (let i: number = 0; i < this.y; i++) {
 			console.log(this.display[i].join(""));
 		}
 	}
 
+	// Clear all display pixels.
 	public clear(): void {
 		this.previousState = this.display;
 		
@@ -35,6 +49,8 @@ export default class Display {
 		}
 	}
 
+	// @TODO: Fix update BG color in runtime
+	// Set the background color.
 	public setBgColor(color: number): void {
 		this.whiteSpace = `\x1b[${color}m${this.whiteSpace}\x1b[49m\x1b[0m`;
 	
@@ -42,12 +58,24 @@ export default class Display {
 		this.display = this.previousState;
 	}
 
+	// Set a pixel in the display.
+	// Can add more than 1 pixel with a string.
+	/**
+	 * @param: {
+	 * 		place: {               // Location to set pixel.
+	 * 			x: number;
+	 * 			y: number;
+	 * 		},
+	 * 		value:  string;        // Value of the pixel.
+	 * 		color?: Array<number>; // Color of the pixel (optional, default is white \x1b[0m).
+	 * }
+	 */
 	public setPixel(place: IPlace, value: string, color?: Array<number>): void {
 		const colorStart: string = color ? color[0].toString() : "0";
 		const colorEnd:   string = color ? color[1].toString() : "0";
 
 		if (validatePlace(place, { x: this.x, y: this.y })) {
-			if (value.length > 1) {
+			if (value.length > 1) { // Check if is more than 1 pixel.
 				for (let i: number = 0; i < value.length; i++) {
 					this.display[place.y][place.x + i] = `\x1b[${colorStart}m${value[i]}\x1b[${colorEnd}m\x1b[0m`;
 				}
@@ -59,6 +87,15 @@ export default class Display {
 		}
 	}
 
+	// Clear one pixel on the display.
+	/**
+	 * @param: {
+	 * 		place: { // Location to clear pixel.
+	 * 			x: number;
+	 * 			y: number;
+	 * 		}
+	 * }
+	 */
 	public clearPixel(place: IPlace): void {
 		if (validatePlace(place, { x: this.x, y: this.y })) {
 			this.display[place.y][place.x] = this.whiteSpace;	
