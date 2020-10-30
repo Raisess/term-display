@@ -2,7 +2,8 @@ import validatePlace from "./utils/validatePlace";
 import { IPlace } from "./interfaces/IPlace";
 
 export default class Display {
-	private display: Array<Array<string>> = [];
+	private display:       Array<Array<string>> = [];
+	private previousState: Array<Array<string>> = [];
 	
 	private x:          number = 50;
 	private y:          number = 50;
@@ -13,24 +14,18 @@ export default class Display {
 		this.y          = size.y;
 		this.whiteSpace = whiteSpace ? whiteSpace : this.whiteSpace;
 
-		for (let i: number = 0; i < this.y; i++) {
-			this.display[i] = [];
-			
-			for (let j: number = 0; j < this.x; j++) {
-				this.display[i][j] = this.whiteSpace;
-			}
-		}
+		this.clear();
 	}
 
 	public show(): void {
 		for (let i: number = 0; i < this.y; i++) {
 			console.log(this.display[i].join(""));
 		}
-
-		return;
 	}
 
 	public clear(): void {
+		this.previousState = this.display;
+		
 		for (let i: number = 0; i < this.y; i++) {
 			this.display[i] = [];
 			
@@ -38,6 +33,13 @@ export default class Display {
 				this.display[i][j] = this.whiteSpace;
 			}
 		}
+	}
+
+	public setBgColor(color: number): void {
+		this.whiteSpace = `\x1b[${color}m${this.whiteSpace}\x1b[49m\x1b[0m`;
+	
+		this.clear();
+		this.display = this.previousState;
 	}
 
 	public setPixel(place: IPlace, value: string, color?: Array<number>): void {
@@ -53,7 +55,7 @@ export default class Display {
 				this.display[place.y][place.x] = `\x1b[${colorStart}m${value}\x1b[${colorEnd}m\x1b[0m`;
 			}
 
-			return;
+			this.previousState = this.display;
 		}
 	}
 
@@ -61,6 +63,8 @@ export default class Display {
 		if (validatePlace(place, { x: this.x, y: this.y })) {
 			this.display[place.y][place.x] = this.whiteSpace;	
 		}
+
+		this.previousState = this.display;
 	}
 }
 
