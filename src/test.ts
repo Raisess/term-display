@@ -1,4 +1,4 @@
-import Display from "./Display";
+import Display, { COLOR, BG_COLOR } from "./Display";
 
 const window: any = {
 	width: 100,
@@ -7,19 +7,17 @@ const window: any = {
 
 const display: Display = new Display({ x: window.width, y: window.height }, ".");
 
-display.setBgColor(40);
+display.setBgColor(BG_COLOR.white);
 
 const title: string = "center title asdfghjkl";
 
-display.setPixel({ x: (window.width / 2) - (Math.round(title.length / 2)), y: 0 }, title, 33);
-display.setPixel({ x: 10, y: 3 }, "O", 34);
-display.setPixel({ x: 30, y: 12 }, "test", 31);
+display.setPixel({
+	x: (window.width / 2) - (Math.round(title.length / 2)),
+	y: 1
+}, title.toUpperCase(), COLOR.yellow);
 
-display.show();
-
-console.log("\n");
-
-display.clearPixel({ x: 10, y: 3 });
+display.setPixel({ x: 10, y: 3 }, "O", COLOR.red);
+display.setPixel({ x: 30, y: 12 }, "test", COLOR.brMagenta);
 
 display.show();
 

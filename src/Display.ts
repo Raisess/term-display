@@ -1,6 +1,13 @@
 import validatePlace from "./utils/validatePlace";
 import { IPlace } from "./interfaces/IPlace";
 
+// data
+import colors from "./data/colors.json";
+import bgColors from "./data/bgColors.json"
+
+export const COLOR:    any = colors;
+export const BG_COLOR: any = bgColors;
+
 export default class Display {
 	// Display memory and display previous memory state.
 	private display:       Array<Array<string>> = [];
