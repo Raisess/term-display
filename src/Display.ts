@@ -11,6 +11,8 @@ export default class Display {
 	private y: number = 50;
 	// No set pixel mark.
 	private whiteSpace: string = "x";
+	// Current background color
+	private currentBgColor: string = "\x1b[0m";
 
 	/**
 	 * @param: {
@@ -52,7 +54,8 @@ export default class Display {
 	// @TODO: Fix update BG color in runtime
 	// Set the background color.
 	public setBgColor(color: number): void {
-		this.whiteSpace = `\x1b[${color}m${this.whiteSpace}\x1b[49m\x1b[0m`;
+		this.whiteSpace     = `\x1b[${color}m\x1b[${color - 10}m${this.whiteSpace}\x1b[89m\x1b[49m\x1b[0m`;
+		this.currentBgColor = `\x1b[${color}m`;
 	
 		this.clear();
 		this.display = this.previousState;
@@ -67,20 +70,19 @@ export default class Display {
 	 * 			y: number;
 	 * 		},
 	 * 		value:  string;        // Value of the pixel.
-	 * 		color?: Array<number>; // Color of the pixel (optional, default is white \x1b[0m).
+	 * 		color?: number; // Color of the pixel (optional, default is white \x1b[0m).
 	 * }
 	 */
-	public setPixel(place: IPlace, value: string, color?: Array<number>): void {
-		const colorStart: string = color ? color[0].toString() : "0";
-		const colorEnd:   string = color ? color[1].toString() : "0";
+	public setPixel(place: IPlace, value: string, color?: number): void {
+		const color_: string = color ? color.toString() : "0";
 
 		if (validatePlace(place, { x: this.x, y: this.y })) {
 			if (value.length > 1) { // Check if is more than 1 pixel.
 				for (let i: number = 0; i < value.length; i++) {
-					this.display[place.y][place.x + i] = `\x1b[${colorStart}m${value[i]}\x1b[${colorEnd}m\x1b[0m`;
+					this.display[place.y][place.x + i] = `${this.currentBgColor}\x1b[${color_}m${value[i]}\x1b[89m\x1b[0m\x1b[49m`;
 				}
 			} else {
-				this.display[place.y][place.x] = `\x1b[${colorStart}m${value}\x1b[${colorEnd}m\x1b[0m`;
+				this.display[place.y][place.x] = `${this.currentBgColor}\x1b[${color_}m${value}\x1b[89m\x1b[0m\x1b[49m`;
 			}
 
 			this.previousState = this.display;
