@@ -1,4 +1,4 @@
-import { IDisplay } from "./interfaces/IDisplay";
+import { IPlace } from "./interfaces/IPlace";
 
 export default class Display {
 	private display: Array<Array<string>> = [];
@@ -7,7 +7,7 @@ export default class Display {
 	private y:          number = 50;
 	private whiteSpace: string = "x";
 
-	constructor(size: IDisplay, whiteSpace?: string) {
+	constructor(size: IPlace, whiteSpace?: string) {
 		this.x          = size.x;
 		this.y          = size.y;
 		this.whiteSpace = whiteSpace ? whiteSpace : this.whiteSpace;
@@ -39,7 +39,7 @@ export default class Display {
 		}
 	}
 
-	public setPixel(place: IDisplay, value: string, color?: Array<number>): void {
+	public setPixel(place: IPlace, value: string, color?: Array<number>): void {
 		const colorStart: string = color ? color[0].toString() : "0";
 		const colorEnd:   string = color ? color[1].toString() : "0";
 
@@ -58,7 +58,7 @@ export default class Display {
 		}
 	}
 
-	public clearPixel(place: IDisplay): void {
+	public clearPixel(place: IPlace): void {
 		if (place.y <= this.y && place.x <= this.x) {
 			this.display[place.y][place.x] = this.whiteSpace;	
 		} else {
