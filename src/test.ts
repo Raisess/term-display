@@ -8,9 +8,9 @@ display.setPixel({ x: 10, y: 3 }, "O", [34, 89]);
 
 display.show();
 
-display.clear();
-
 console.log("\n");
+
+display.clearPixel({ x: 10, y: 3 });
 
 display.show();
 

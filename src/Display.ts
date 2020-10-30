@@ -43,15 +43,27 @@ export default class Display {
 		const colorStart: string = color ? color[0].toString() : "0";
 		const colorEnd:   string = color ? color[1].toString() : "0";
 
-		if (value.length > 1) {
-			for (let i: number = 0; i < value.length; i++) {
-				this.display[place.y][place.x + i] = `\x1b[${colorStart}m${value[i]}\x1b[${colorEnd}m\x1b[0m`;
+		if (place.y <= this.y || place.x <= this.x) {
+			if (value.length > 1) {
+				for (let i: number = 0; i < value.length; i++) {
+					this.display[place.y][place.x + i] = `\x1b[${colorStart}m${value[i]}\x1b[${colorEnd}m\x1b[0m`;
+				}
+			} else {
+				this.display[place.y][place.x] = `\x1b[${colorStart}m${value}\x1b[${colorEnd}m\x1b[0m`;
 			}
-		} else {
-			this.display[place.y][place.x] = `\x1b[${colorStart}m${value}\x1b[${colorEnd}m\x1b[0m`;
-		}
 
-		return;
+			return;
+		} else {
+			throw new Error(`Invalid pixel location ${place.x}:${place.y}!`);
+		}
+	}
+
+	public clearPixel(place: IDisplay): void {
+		if (place.y <= this.y || place.x <= this.x) {
+			this.display[place.y][place.x] = this.whiteSpace;	
+		} else {
+			throw new Error(`Invalid pixel location ${place.x}:${place.y}!`);
+		}
 	}
 }
 
