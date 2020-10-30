@@ -27,13 +27,16 @@ export default class Display {
 		return;
 	}
 
-	public setPixel(place: IDisplay, value: string): void {
+	public setPixel(place: IDisplay, value: string, color?: Array<number>): void {
+		const colorStart: string = color ? color[0].toString() : "0";
+		const colorEnd:   string = color ? color[1].toString() : "0";
+
 		if (value.length > 1) {
 			for (let i: number = 0; i < value.length; i++) {
-				this.display[place.y][place.x + i] = value[i];
+				this.display[place.y][place.x + i] = `\x1b[${colorStart}m${value[i]}\x1b[${colorEnd}m\x1b[0m`;
 			}
 		} else {
-			this.display[place.y][place.x] = value;
+			this.display[place.y][place.x] = `\x1b[${colorStart}m${value}\x1b[${colorEnd}m\x1b[0m`;
 		}
 
 		return;
