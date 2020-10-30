@@ -2,7 +2,7 @@
   "name": "term-display",
   "version": "1.0.0",
   "description": "",
-  "main": "./src/index.ts",
+  "main": "./src/Display.ts",
   "scripts": {
 		"start": "node ./dist/test.js",
 		"start-dev": "ts-node ./src/test.ts",

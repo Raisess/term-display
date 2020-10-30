@@ -3,18 +3,20 @@ import { IDisplay } from "./interfaces/IDisplay";
 export default class Display {
 	private display: Array<Array<string>> = [];
 	
-	private x: number = 50;
-	private y: number = 50;
+	private x:          number = 50;
+	private y:          number = 50;
+	private whiteSpace: string = "x";
 
 	constructor(size: IDisplay, whiteSpace?: string) {
-		this.x = size.x;
-		this.y = size.y;
+		this.x          = size.x;
+		this.y          = size.y;
+		this.whiteSpace = whiteSpace ? whiteSpace : this.whiteSpace;
 
 		for (let i: number = 0; i < this.y; i++) {
 			this.display[i] = [];
 			
 			for (let j: number = 0; j < this.x; j++) {
-				this.display[i][j] = whiteSpace ? whiteSpace : "x";
+				this.display[i][j] = this.whiteSpace;
 			}
 		}
 	}
@@ -25,6 +27,16 @@ export default class Display {
 		}
 
 		return;
+	}
+
+	public clear(): void {
+		for (let i: number = 0; i < this.y; i++) {
+			this.display[i] = [];
+			
+			for (let j: number = 0; j < this.x; j++) {
+				this.display[i][j] = this.whiteSpace;
+			}
+		}
 	}
 
 	public setPixel(place: IDisplay, value: string, color?: Array<number>): void {
