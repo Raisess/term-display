@@ -1,5 +1,8 @@
 import validatePlace from "./utils/validatePlace";
+
+// interfaces
 import { IPlace } from "./interfaces/IPlace";
+import { IPixel } from "./interfaces/IPixel";
 
 // data
 import colors from "./data/colors.json";
@@ -9,9 +12,9 @@ export const COLOR:    any = colors;
 export const BG_COLOR: any = bgColors;
 
 export default class Display {
-	// Display memory and display previous memory state.
-	private display:       Array<Array<string>> = [];
-	private previousState: Array<Array<string>> = [];
+	// Display memory and pixels memory.
+	private display: Array<Array<string>> = [];
+	private pixels:  Array<IPixel>        = [];
 
 	// Display size.
 	private x: number = 50;
@@ -47,8 +50,6 @@ export default class Display {
 
 	// Clear all display pixels.
 	public clear(): void {
-		this.previousState = this.display;
-		
 		for (let i: number = 0; i < this.y; i++) {
 			this.display[i] = [];
 			
@@ -61,11 +62,15 @@ export default class Display {
 	// @TODO: Fix update BG color in runtime
 	// Set the background color.
 	public setBgColor(color: number): void {
-		this.whiteSpace     = `\x1b[${color}m\x1b[${color - 10}m${this.whiteSpace}\x1b[89m\x1b[49m\x1b[0m`;
 		this.currentBgColor = `\x1b[${color}m`;
-	
+		this.whiteSpace     = `${this.currentBgColor}\x1b[${color - 10}m${this.whiteSpace}\x1b[89m\x1b[0m\x1b[49m`;
+		console.log(this.whiteSpace);
+
 		this.clear();
-		this.display = this.previousState;
+		
+		for (let pixel of this.pixels) {
+			this.setPixel(pixel.place, pixel.value, pixel.color, true);
+		}
 	}
 
 	// Set a pixel in the display.
@@ -80,7 +85,7 @@ export default class Display {
 	 * 		color?: number; // Color of the pixel (optional, default is white \x1b[0m).
 	 * }
 	 */
-	public setPixel(place: IPlace, value: string, color?: number): void {
+	public setPixel(place: IPlace, value: string, color?: number, noSave?: boolean): void {
 		const color_: string = color ? color.toString() : "0";
 
 		if (validatePlace(place, { x: this.x, y: this.y })) {
@@ -92,7 +97,16 @@ export default class Display {
 				this.display[place.y][place.x] = `${this.currentBgColor}\x1b[${color_}m${value}\x1b[89m\x1b[0m\x1b[49m`;
 			}
 
-			this.previousState = this.display;
+			if (!noSave) {
+				this.pixels.push({
+					place: {
+						x: place.x,
+						y: place.y
+					},
+					value: value,
+					color: color ? color : 0
+				});
+			}
 		}
 	}
 
@@ -109,8 +123,6 @@ export default class Display {
 		if (validatePlace(place, { x: this.x, y: this.y })) {
 			this.display[place.y][place.x] = this.whiteSpace;	
 		}
-
-		this.previousState = this.display;
 	}
 }
 

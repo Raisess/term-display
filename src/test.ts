@@ -7,9 +7,9 @@ const window: any = {
 
 const display: Display = new Display({ x: window.width, y: window.height }, ".");
 
-display.setBgColor(BG_COLOR.white);
-
 const title: string = "center title asdfghjkl";
+
+display.setBgColor(BG_COLOR.white);
 
 display.setPixel({
 	x: (window.width / 2) - (Math.round(title.length / 2)),
@@ -18,6 +18,12 @@ display.setPixel({
 
 display.setPixel({ x: 10, y: 3 }, "O", COLOR.red);
 display.setPixel({ x: 30, y: 12 }, "test", COLOR.brMagenta);
+
+display.show();
+
+console.log("");
+
+display.setBgColor(BG_COLOR.green);
 
 display.show();
 
