@@ -1,4 +1,5 @@
 import validatePlace from "./utils/validatePlace";
+import generatePixel from "./utils/generatePixel";
 
 // interfaces
 import { IPlace } from "./interfaces/IPlace";
@@ -54,7 +55,11 @@ export default class Display {
 			this.display[i] = [];
 			
 			for (let j: number = 0; j < this.x; j++) {
-				this.display[i][j] = `\x1b[${this.currentBgColor}m\x1b[${this.currentBgColor - 10}m${this.whiteSpace}\x1b[89m\x1b[0m\x1b[49m`;
+				if (this.currentBgColor !== 0) {
+					this.display[i][j] = generatePixel(this.currentBgColor, this.currentBgColor - 10, this.whiteSpace);
+				} else {
+					this.display[i][j] = generatePixel(0, 0, this.whiteSpace);
+				}
 			}
 		}
 	}
@@ -88,10 +93,10 @@ export default class Display {
 		if (validatePlace(place, { x: this.x, y: this.y })) {
 			if (value.length > 1) { // Check if is more than 1 pixel.
 				for (let i: number = 0; i < value.length; i++) {
-					this.display[place.y][place.x + i] = `\x1b[${this.currentBgColor}m\x1b[${color_}m${value[i]}\x1b[89m\x1b[0m\x1b[49m`;
+					this.display[place.y][place.x + i] = generatePixel(this.currentBgColor, color_, value[i]);
 				}
 			} else {
-				this.display[place.y][place.x] = `\x1b[${this.currentBgColor}m\x1b[${color_}m${value}\x1b[89m\x1b[0m\x1b[49m`;
+				this.display[place.y][place.x] = generatePixel(this.currentBgColor, color_, value);
 			}
 
 			if (!noSave) {
@@ -107,7 +112,7 @@ export default class Display {
 		}
 	}
 
-	// Get a specific pixel value
+	// Get a specific pixel value.
 	/**
 	 * @param: {
 	 * 		x: number;
