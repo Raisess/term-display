@@ -75,7 +75,7 @@ display.show(); // Shows a blank display.
  * 	}
  * }
  */
-console.log(display.getPixel({ x: 10, y: 3 })); // "{ place: { x: 10, y: 3 }, value: "X", color: 31 }".
+console.log(display.getPixel({ x: 10, y: 3 })); // "{ place: { x: 10, y: 3 }, value: "X", color: 31, compost: false }".
 
 // Cleaning a pixel
 /**
