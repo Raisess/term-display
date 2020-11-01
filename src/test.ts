@@ -21,7 +21,8 @@ display.setPixel({ x: 30, y: 12 }, "test", COLOR.brMagenta);
 
 display.show();
 
-console.log("");
+console.log(display.getPixel({ x: 30, y: 12 }));
+console.log(display.getPixel({ x: 100, y: 10 }));
 
 display.setBgColor(BG_COLOR.green);
 

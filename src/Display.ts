@@ -110,6 +110,26 @@ export default class Display {
 		}
 	}
 
+	// Get a specific pixel value
+	/**
+	 * @param: {
+	 * 		x: number;
+	 * 		y: number;
+	 * }
+	 * @returns: IPixel || undefined;
+	 */
+	public getPixel(place: IPlace): IPixel | undefined {
+		if (validatePlace(place, { x: this.x, y: this.y })) {
+			for (let pixel of this.pixels) {
+				if (place.x === pixel.place.x && place.y === pixel.place.y) {
+					return pixel;
+				}
+			}
+
+			return undefined;
+		}
+	}
+
 	// Clear one pixel on the display.
 	/**
 	 * @param: {
