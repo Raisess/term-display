@@ -2,7 +2,7 @@
 
 ## ⁉️  What the f#ck is this?
 
-Term Display is a lib to create colored displays on terminal, based on coordenates.
+Term Display is a lib to create colored displays on terminal, based on coordinates.
 
 ## 🔮 Getting Started
 
@@ -60,7 +60,7 @@ display.show();
 // Clear all pixels on memory.
 display.clear();
 
-display.show(); // shows a blank display
+display.show(); // Shows a blank display.
 ```
 
 #### 🔨 Getting and cleaning specific pixels

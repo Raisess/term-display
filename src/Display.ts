@@ -49,6 +49,7 @@ export default class Display {
 		}
 	}
 
+	// @TODO: Clear pixels memory when is setted to clear.
 	// Clear all display pixels.
 	public clear(): void {
 		for (let i: number = 0; i < this.y; i++) {
@@ -112,6 +113,7 @@ export default class Display {
 		}
 	}
 
+	// @TODO: Get strings more than 1 pixel (compost pixels). 
 	// Get a specific pixel value.
 	/**
 	 * @param: {
