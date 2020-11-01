@@ -1,14 +1,15 @@
 {
   "name": "term-display",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Terminal display lib.",
-  "main": "./src/Display.ts",
+  "main": "./dist/Display.ts",
   "scripts": {
 		"start": "node ./dist/test.js",
 		"start-dev": "ts-node ./src/test.ts",
 		"compile": "tsc -p ./tsconfig.json",
 		"clean": "rm -r ./dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+		"postinstall": "npm run compile"
   },
   "repository": {
     "type": "git",
