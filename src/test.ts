@@ -28,3 +28,9 @@ display.setBgColor(BG_COLOR.green);
 
 display.show();
 
+console.log("");
+
+display.setBgColor(BG_COLOR.cyan);
+
+display.show();
+

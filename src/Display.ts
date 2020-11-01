@@ -22,7 +22,7 @@ export default class Display {
 	// No set pixel mark.
 	private whiteSpace: string = "x";
 	// Current background color
-	private currentBgColor: string = "\x1b[0m";
+	private currentBgColor: number = 0;
 
 	/**
 	 * @param: {
@@ -54,17 +54,14 @@ export default class Display {
 			this.display[i] = [];
 			
 			for (let j: number = 0; j < this.x; j++) {
-				this.display[i][j] = this.whiteSpace;
+				this.display[i][j] = `\x1b[${this.currentBgColor}m\x1b[${this.currentBgColor - 10}m${this.whiteSpace}\x1b[89m\x1b[0m\x1b[49m`;
 			}
 		}
 	}
 
-	// @TODO: Fix update BG color in runtime
 	// Set the background color.
 	public setBgColor(color: number): void {
-		this.currentBgColor = `\x1b[${color}m`;
-		this.whiteSpace     = `${this.currentBgColor}\x1b[${color - 10}m${this.whiteSpace}\x1b[89m\x1b[0m\x1b[49m`;
-		console.log(this.whiteSpace);
+		this.currentBgColor = color;
 
 		this.clear();
 		
@@ -91,10 +88,10 @@ export default class Display {
 		if (validatePlace(place, { x: this.x, y: this.y })) {
 			if (value.length > 1) { // Check if is more than 1 pixel.
 				for (let i: number = 0; i < value.length; i++) {
-					this.display[place.y][place.x + i] = `${this.currentBgColor}\x1b[${color_}m${value[i]}\x1b[89m\x1b[0m\x1b[49m`;
+					this.display[place.y][place.x + i] = `\x1b[${this.currentBgColor}m\x1b[${color_}m${value[i]}\x1b[89m\x1b[0m\x1b[49m`;
 				}
 			} else {
-				this.display[place.y][place.x] = `${this.currentBgColor}\x1b[${color_}m${value}\x1b[89m\x1b[0m\x1b[49m`;
+				this.display[place.y][place.x] = `\x1b[${this.currentBgColor}m\x1b[${color_}m${value}\x1b[89m\x1b[0m\x1b[49m`;
 			}
 
 			if (!noSave) {
