@@ -143,7 +143,11 @@ export default class Display {
 	 */
 	public clearPixel(place: IPlace): void {
 		if (validatePlace(place, { x: this.x, y: this.y })) {
-			this.display[place.y][place.x] = this.whiteSpace;	
+				if (this.currentBgColor !== 0) {
+					this.display[place.y][place.x] = generatePixel(this.currentBgColor, this.currentBgColor - 10, this.whiteSpace);
+				} else {
+					this.display[place.y][place.x] = generatePixel(0, 0, this.whiteSpace);
+				}
 		}
 	}
 }

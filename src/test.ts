@@ -32,5 +32,7 @@ console.log("");
 
 display.setBgColor(BG_COLOR.cyan);
 
+display.clearPixel({ x: 10, y: 3 });
+
 display.show();
 
