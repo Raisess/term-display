@@ -15,6 +15,14 @@ npm i --save term-display
 ```
 ### 🔧 Using lib
 
+Preparing to use, create a declaration file, like **_.d.ts** in you project root.
+
+```ts
+declare module "term-display";
+```
+
+You need to use that, because the lib compiles to Javascript when installed.
+
 #### 🔨 Basics
 
 ```ts
