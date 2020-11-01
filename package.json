@@ -1,7 +1,7 @@
 {
   "name": "term-display",
   "version": "1.0.0",
-  "description": "",
+  "description": "Terminal display lib.",
   "main": "./src/Display.ts",
   "scripts": {
 		"start": "node ./dist/test.js",
@@ -23,5 +23,14 @@
   "devDependencies": {
     "ts-node": "^9.0.0",
     "typescript": "^4.0.5"
-  }
+  },
+	"keywords": [
+		"terminal",
+		"terminal-display",
+		"colors",
+		"console",
+		"console-display",
+		"terminal-colors",
+		"console-colors"
+	]
 }
