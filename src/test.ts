@@ -9,7 +9,7 @@ const display: Display = new Display({ x: window.width, y: window.height }, ".")
 
 const title: string = "center title asdfghjkl";
 
-display.setBgColor(BG_COLOR.white);
+//display.setBgColor(BG_COLOR.white);
 
 display.setPixel({
 	x: (window.width / 2) - (Math.round(title.length / 2)),

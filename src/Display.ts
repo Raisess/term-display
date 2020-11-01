@@ -83,7 +83,7 @@ export default class Display {
 	 * }
 	 */
 	public setPixel(place: IPlace, value: string, color?: number, noSave?: boolean): void {
-		const color_: string = color ? color.toString() : "0";
+		const color_: number = color ? color : 0;
 
 		if (validatePlace(place, { x: this.x, y: this.y })) {
 			if (value.length > 1) { // Check if is more than 1 pixel.
@@ -101,7 +101,7 @@ export default class Display {
 						y: place.y
 					},
 					value: value,
-					color: color ? color : 0
+					color: color_
 				});
 			}
 		}
