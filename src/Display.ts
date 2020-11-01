@@ -6,8 +6,8 @@ import { IPlace } from "./interfaces/IPlace";
 import { IPixel } from "./interfaces/IPixel";
 
 // data
-import colors from "./data/colors.json";
-import bgColors from "./data/bgColors.json"
+import { colors } from "./data/colors";
+import { bgColors } from "./data/bgColors";
 
 export const COLOR:    any = colors;
 export const BG_COLOR: any = bgColors;

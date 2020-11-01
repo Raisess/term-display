@@ -13,17 +13,6 @@ Term Display is a lib to create colored displays on terminal, based on coordenat
 ```shell
 npm i --save term-display
 ```
-
-### ❓ How to use with javascript
-
-Go to project node modules folder, then go to term display folder and execute `npm run compile` command.
-
-```shell
-cd node_modules/term-display | npm run compile
-```
-
-update the lib **package.json** main value to `./dist/Display.js`.
-
 ### 🔧 Using lib
 
 #### 🔨 Basics
@@ -37,7 +26,7 @@ const windowSize: any = {
 };
 
 // Instacing the display.
-const display: Display = new Display(windowSize, "."); // The second param is the white space value, default is "x".
+const display: any = new Display(windowSize, "."); // The second param is the white space value, default is "x".
 
 // Creating a pixel or a string.
 /**
