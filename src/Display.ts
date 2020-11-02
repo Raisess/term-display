@@ -15,7 +15,7 @@ export const BG_COLOR: any = bgColors;
 export default class Display {
 	// Display memory and pixels memory.
 	private display: Array<Array<string>> = [];
-	private pixels:  Array<IPixel>        = [];
+	public  pixels:  Array<IPixel>        = [];
 
 	// Display size.
 	private x: number = 50;
@@ -50,7 +50,7 @@ export default class Display {
 	}
 
 	// Clear all display pixels.
-	public clear(): void {
+	public clear(clearPixelsMem: boolean = true): void {
 		for (let i: number = 0; i < this.y; i++) {
 			this.display[i] = [];
 			
@@ -62,13 +62,15 @@ export default class Display {
 				}
 			}
 		}
+
+		if (clearPixelsMem) this.pixels = [];
 	}
 
 	// Set the background color.
 	public setBgColor(color: number): void {
 		this.currentBgColor = color;
 
-		this.clear();
+		this.clear(false);
 		
 		for (let pixel of this.pixels) {
 			this.setPixel(pixel.place, pixel.value, pixel.color, true);
@@ -105,9 +107,11 @@ export default class Display {
 						x: place.x,
 						y: place.y
 					},
-					value:   value,
-					color:   color,
-					compost: value.length > 1 ? true : false
+					idx:       this.pixels.length,
+					value:     value,
+					color:     color,
+					size:      value.length,
+					isCompost: value.length > 1 ? true : false
 				});
 			}
 		}
@@ -124,8 +128,10 @@ export default class Display {
 	public getPixel(place: IPlace): IPixel | undefined {
 		if (validatePlace(place, { x: this.x, y: this.y })) {
 			for (let pixel of this.pixels) {
-				if (place.x === pixel.place.x && place.y === pixel.place.y) {
-					return pixel;
+				if(pixel) { // When clear, pixel is setted to undefined.
+					if (place.x === pixel.place.x && place.y === pixel.place.y) {
+						return pixel;
+					}
 				}
 			}
 
@@ -133,7 +139,6 @@ export default class Display {
 		}
 	}
 
-	// @TODO: Clear compost pixels.
 	// Clear one pixel on the display.
 	/**
 	 * @param: {
@@ -145,11 +150,17 @@ export default class Display {
 	 */
 	public clearPixel(place: IPlace): void {
 		if (validatePlace(place, { x: this.x, y: this.y })) {
-				if (this.currentBgColor !== 0) {
-					this.display[place.y][place.x] = generatePixel(this.currentBgColor, this.currentBgColor - 10, this.whiteSpace);
-				} else {
-					this.display[place.y][place.x] = generatePixel(0, 0, this.whiteSpace);
+			const pixel: IPixel | undefined = this.getPixel(place);
+
+			if (pixel) {
+				delete this.pixels[pixel.idx];
+				
+				this.clear(false);
+				
+				for (let pix of this.pixels) {
+					if (pix) this.setPixel(pix.place, pix.value, pix.color, true);
 				}
+			}
 		}
 	}
 }
