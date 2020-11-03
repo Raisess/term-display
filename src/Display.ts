@@ -1,5 +1,5 @@
-import validatePlace from "./utils/validatePlace";
-import generatePixel from "./utils/generatePixel";
+import validatePlace from "./modules/validatePlace";
+import generateDisplayablePixel from "./modules/generateDisplayablePixel";
 
 // interfaces
 import { IPlace } from "./interfaces/IPlace";
@@ -50,15 +50,20 @@ export default class Display {
 	}
 
 	// Clear all display pixels.
+	/**
+	 * @param: {
+	 * 		clearPixelsMem: boolean; // If is it false, the pixels memory is not cleared, just only display memory is cleared.
+	 * }
+	 */
 	public clear(clearPixelsMem: boolean = true): void {
 		for (let i: number = 0; i < this.y; i++) {
 			this.display[i] = [];
 			
 			for (let j: number = 0; j < this.x; j++) {
 				if (this.currentBgColor !== 0) {
-					this.display[i][j] = generatePixel(this.currentBgColor, this.currentBgColor - 10, this.whiteSpace);
+					this.display[i][j] = generateDisplayablePixel(this.currentBgColor, this.currentBgColor - 10, this.whiteSpace);
 				} else {
-					this.display[i][j] = generatePixel(0, 0, this.whiteSpace);
+					this.display[i][j] = generateDisplayablePixel(0, 0, this.whiteSpace);
 				}
 			}
 		}
@@ -67,6 +72,11 @@ export default class Display {
 	}
 
 	// Set the background color.
+	/**
+	 * @param: {
+	 * 		color: number;
+	 * }
+	 */
 	public setBgColor(color: number): void {
 		this.currentBgColor = color;
 
@@ -89,16 +99,16 @@ export default class Display {
 	 * 		color?: number; // Color of the pixel (optional, default is white \x1b[0m).
 	 * }
 	 */
-	public setPixel(place: IPlace, value: string, color?: number, noSave?: boolean): void {
+	public setPixel(place: IPlace, value: string, color?: number, noSave: boolean = false): void {
 		const color_: number = color ? color : 0;
 
 		if (validatePlace(place, { x: this.x, y: this.y })) {
 			if (value.length > 1) { // Check if is more than 1 pixel.
 				for (let i: number = 0; i < value.length; i++) {
-					this.display[place.y][place.x + i] = generatePixel(this.currentBgColor, color_, value[i]);
+					this.display[place.y][place.x + i] = generateDisplayablePixel(this.currentBgColor, color_, value[i]);
 				}
 			} else {
-				this.display[place.y][place.x] = generatePixel(this.currentBgColor, color_, value);
+				this.display[place.y][place.x] = generateDisplayablePixel(this.currentBgColor, color_, value);
 			}
 
 			if (!noSave) {
