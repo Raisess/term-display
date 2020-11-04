@@ -37,8 +37,8 @@ export default class Display {
 	 * }
 	 */
 	constructor(size: IPlace, whiteSpace?: string) {
-		this.size.x     = size.x;
-		this.size.y     = size.y;
+		this.size.x     = size.x + 1;
+		this.size.y     = size.y + 1;
 		this.whiteSpace = whiteSpace ? whiteSpace : this.whiteSpace;
 
 		this.clear();

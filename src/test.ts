@@ -1,7 +1,7 @@
 import Display, { COLOR, BG_COLOR } from "./Display";
 
 const window: any = {
-	width: 100,
+	width:  100,
 	height: 20
 };
 
@@ -17,6 +17,7 @@ display.setPixel({
 display.setPixel({ x: 10, y: 3 }, "O", COLOR.red);
 display.setPixel({ x: 30, y: 12 }, "test", COLOR.brMagenta);
 display.setPixel({ x: 50, y: 15 }, "Hello World", COLOR.red);
+display.setPixel({ x: 100, y: 20 }, "Z", COLOR.blue);
 
 display.show();
 
@@ -29,7 +30,7 @@ display.show();
 
 console.log("");
 
-display.setBgColor(BG_COLOR.green);
+display.setBgColor(BG_COLOR.black);
 
 display.clearPixel({ x: 50, y: 15 });
 
