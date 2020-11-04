@@ -18,8 +18,10 @@ export default class Display {
 	public  pixels:  Array<IPixel>        = [];
 
 	// Display size.
-	private x: number = 50;
-	private y: number = 50;
+	private size: IPlace = {
+		x: 50,
+		y: 50
+	};
 	// No set pixel mark.
 	private whiteSpace: string = "x";
 	// Current background color
@@ -35,8 +37,8 @@ export default class Display {
 	 * }
 	 */
 	constructor(size: IPlace, whiteSpace?: string) {
-		this.x          = size.x;
-		this.y          = size.y;
+		this.size.x     = size.x;
+		this.size.y     = size.y;
 		this.whiteSpace = whiteSpace ? whiteSpace : this.whiteSpace;
 
 		this.clear();
@@ -44,7 +46,7 @@ export default class Display {
 
 	// Show display.
 	public show(): void {
-		for (let i: number = 0; i < this.y; i++) {
+		for (let i: number = 0; i < this.size.y; i++) {
 			console.log(this.display[i].join(""));
 		}
 	}
@@ -56,10 +58,10 @@ export default class Display {
 	 * }
 	 */
 	public clear(clearPixelsMem: boolean = true): void {
-		for (let i: number = 0; i < this.y; i++) {
+		for (let i: number = 0; i < this.size.y; i++) {
 			this.display[i] = [];
 			
-			for (let j: number = 0; j < this.x; j++) {
+			for (let j: number = 0; j < this.size.x; j++) {
 				if (this.currentBgColor !== 0) {
 					this.display[i][j] = generateDisplayablePixel(this.currentBgColor, this.currentBgColor - 10, this.whiteSpace);
 				} else {
@@ -102,7 +104,7 @@ export default class Display {
 	public setPixel(place: IPlace, value: string, color?: number, noSave: boolean = false): void {
 		const color_: number = color ? color : 0;
 
-		if (validatePlace(place, { x: this.x, y: this.y })) {
+		if (validatePlace(place, this.size)) {
 			if (value.length > 1) { // Check if is more than 1 pixel.
 				for (let i: number = 0; i < value.length; i++) {
 					this.display[place.y][place.x + i] = generateDisplayablePixel(this.currentBgColor, color_, value[i]);
@@ -136,7 +138,7 @@ export default class Display {
 	 * @returns: IPixel || undefined;
 	 */
 	public getPixel(place: IPlace): IPixel | undefined {
-		if (validatePlace(place, { x: this.x, y: this.y })) {
+		if (validatePlace(place, this.size)) {
 			for (let pixel of this.pixels) {
 				if(pixel) { // When clear, pixel is setted to undefined.
 					if (place.x === pixel.place.x && place.y === pixel.place.y) {
@@ -159,7 +161,7 @@ export default class Display {
 	 * }
 	 */
 	public clearPixel(place: IPlace): void {
-		if (validatePlace(place, { x: this.x, y: this.y })) {
+		if (validatePlace(place, this.size)) {
 			const pixel: IPixel | undefined = this.getPixel(place);
 
 			if (pixel) {
