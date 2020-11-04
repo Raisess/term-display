@@ -41,8 +41,8 @@ export default class Display {
 	 * }
 	 */
 	constructor(size: IPlace, whiteSpace?: string) {
-		this.size.x     = size.x + 1;
-		this.size.y     = size.y + 1;
+		this.size.x     = Math.round(size.x) + 1;
+		this.size.y     = Math.round(size.y) + 1;
 		this.whiteSpace = whiteSpace ? whiteSpace : this.whiteSpace;
 
 		this.clear(); // Creates the window.
@@ -111,17 +111,17 @@ export default class Display {
 		if (validatePlace(place, this.size)) {
 			if (value.length > 1) { // Check if is more than 1 pixel.
 				for (let i: number = 0; i < value.length; i++) {
-					this.display[place.y][place.x + i] = generateDisplayablePixel(this.currentBgColor, color_, value[i]);
+					this.display[Math.round(place.y)][Math.round(place.x) + i] = generateDisplayablePixel(this.currentBgColor, color_, value[i]);
 				}
 			} else {
-				this.display[place.y][place.x] = generateDisplayablePixel(this.currentBgColor, color_, value);
+				this.display[Math.round(place.y)][Math.round(place.x)] = generateDisplayablePixel(this.currentBgColor, color_, value);
 			}
 
 			if (!noSave) {
 				this.pixels.push({
 					place: {
-						x: place.x,
-						y: place.y
+						x: Math.round(place.x),
+						y: Math.round(place.y)
 					},
 					idx:       this.pixels.length,
 					value:     value,
@@ -147,7 +147,7 @@ export default class Display {
 		if (validatePlace(place, this.size)) {
 			for (let pixel of this.pixels) {
 				if(pixel) { // When clear, pixel is setted to undefined.
-					if (place.x === pixel.place.x && place.y === pixel.place.y) {
+					if (Math.round(place.x) === pixel.place.x && Math.round(place.y) === pixel.place.y) {
 						return pixel;
 					}
 				}

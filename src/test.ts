@@ -12,7 +12,7 @@ const display: Display = new Display({ x: window.width, y: window.height }, ".")
 const title: string = "center title asdfghjkl";
 
 display.setPixel({
-	x: (Math.round(window.width / 2)) - (Math.round(title.length / 2)),
+	x: (window.width / 2) - (title.length / 2),
 	y: 1
 }, title.toUpperCase(), COLOR.yellow);
 

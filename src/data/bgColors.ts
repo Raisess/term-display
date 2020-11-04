@@ -15,5 +15,5 @@ export const bgColors: any = {
 	brMagenta: 105,
 	brWhite: 107,
 	brBlack: 100
-}
+};
 
