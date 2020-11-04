@@ -5,12 +5,14 @@ const window: any = {
 	height: TERM_HEIGHT
 };
 
+console.log(window);
+
 const display: Display = new Display({ x: window.width, y: window.height }, ".");
 
 const title: string = "center title asdfghjkl";
 
 display.setPixel({
-	x: (window.width / 2) - (Math.round(title.length / 2)),
+	x: (Math.round(window.width / 2)) - (Math.round(title.length / 2)),
 	y: 1
 }, title.toUpperCase(), COLOR.yellow);
 
