@@ -54,7 +54,7 @@ export default class Display {
 	// Clear all display pixels.
 	/**
 	 * @param: {
-	 * 		clearPixelsMem: boolean; // If is it false, the pixels memory is not cleared, just only display memory is cleared.
+	 * 	clearPixelsMem: boolean; // If is it false, the pixels memory is not cleared, just only display memory is cleared.
 	 * }
 	 */
 	public clear(clearPixelsMem: boolean = true): void {
