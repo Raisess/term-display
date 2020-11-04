@@ -76,7 +76,7 @@ export default class Display {
 	// Set the background color.
 	/**
 	 * @param: {
-	 * 		color: number;
+	 * 	color: number;
 	 * }
 	 */
 	public setBgColor(color: number): void {
@@ -93,12 +93,12 @@ export default class Display {
 	// Can add more than 1 pixel with a string.
 	/**
 	 * @param: {
-	 * 		place: {               // Location to set pixel.
-	 * 			x: number;
-	 * 			y: number;
-	 * 		},
-	 * 		value:  string;        // Value of the pixel.
-	 * 		color?: number; // Color of the pixel (optional, default is white \x1b[0m).
+	 * 	place: {        // Location to set pixel.
+	 * 		x: number;
+	 * 		y: number;
+	 * 	},
+	 * 	value:  string; // Value of the pixel.
+	 * 	color?: number; // Color of the pixel (optional, default is white \x1b[0m).
 	 * }
 	 */
 	public setPixel(place: IPlace, value: string, color?: number, noSave: boolean = false): void {
@@ -132,10 +132,10 @@ export default class Display {
 	// Get a specific pixel value.
 	/**
 	 * @param: {
-	 * 		place: {
-	 * 			x: number;
-	 * 			y: number;
-	 * 		}
+	 * 	place: {
+	 * 		x: number;
+	 * 		y: number;
+	 * 	}
 	 * }
 	 * @returns: IPixel || undefined;
 	 */
@@ -156,10 +156,10 @@ export default class Display {
 	// Clear one pixel on the display.
 	/**
 	 * @param: {
-	 * 		place: { // Location to clear pixel.
-	 * 			x: number;
-	 * 			y: number;
-	 * 		}
+	 * 	place: { // Location to clear pixel.
+	 * 		x: number;
+	 * 		y: number;
+	 * 	}
 	 * }
 	 */
 	public clearPixel(place: IPlace): void {
