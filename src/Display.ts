@@ -132,8 +132,10 @@ export default class Display {
 	// Get a specific pixel value.
 	/**
 	 * @param: {
-	 * 		x: number;
-	 * 		y: number;
+	 * 		place: {
+	 * 			x: number;
+	 * 			y: number;
+	 * 		}
 	 * }
 	 * @returns: IPixel || undefined;
 	 */
