@@ -23,6 +23,8 @@ declare module "term-display";
 
 You need to use that, because the lib compiles to Javascript when installed.
 
+* **The lib auto round's X and Y place values and size values.**
+
 #### 🔨 Basics
 
 ```ts
