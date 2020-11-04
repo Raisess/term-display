@@ -1,8 +1,8 @@
-import Display, { COLOR, BG_COLOR } from "./Display";
+import Display, { COLOR, BG_COLOR, TERM_WIDTH, TERM_HEIGHT } from "./Display";
 
 const window: any = {
-	width:  100,
-	height: 20
+	width:  TERM_WIDTH,
+	height: TERM_HEIGHT
 };
 
 const display: Display = new Display({ x: window.width, y: window.height }, ".");

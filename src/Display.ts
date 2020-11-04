@@ -9,8 +9,12 @@ import { IPixel } from "./interfaces/IPixel";
 import { colors } from "./data/colors";
 import { bgColors } from "./data/bgColors";
 
+// colors data
 export const COLOR:    any = colors;
 export const BG_COLOR: any = bgColors;
+// terminal size
+export const TERM_WIDTH:  number = process.stdout.columns - 1;
+export const TERM_HEIGHT: number = process.stdout.rows - 1;
 
 export default class Display {
 	// Display memory and pixels memory.
@@ -19,8 +23,8 @@ export default class Display {
 
 	// Display size.
 	private size: IPlace = {
-		x: 50,
-		y: 50
+		x: 0,
+		y: 0
 	};
 	// No set pixel mark.
 	private whiteSpace: string = "x";

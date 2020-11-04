@@ -89,3 +89,18 @@ console.log(display.getPixel({ x: 10, y: 3 })); // "{ place: { x: 10, y: 3 }, va
 display.clearPixel({ x: 10, y: 3 });
 ```
 
+#### 🔨 Current terminal window size
+
+```ts
+import Display, { TERM_WIDTH, TERM_HEIGHT } from "term-display";
+
+const windowSize: any = {
+	x: TERM_WIDTH,
+	y: TERM_HEIGHT
+};
+
+const display: any = new Display(windowSize);
+```
+
+That code set the current terminal window size to display, yeah you can use in fullscreen if want.
+
