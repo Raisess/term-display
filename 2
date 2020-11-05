@@ -13,8 +13,8 @@ import { bgColors } from "./data/bgColors";
 export const COLOR:    any = colors;
 export const BG_COLOR: any = bgColors;
 // terminal size
-export const TERM_WIDTH:  number = process.stdout.columns;
-export const TERM_HEIGHT: number = process.stdout.rows;
+export const TERM_WIDTH:  number = process.stdout.columns + 1;
+export const TERM_HEIGHT: number = process.stdout.rows + 1;
 
 export default class Display {
 	// Display memory and pixels memory.
@@ -111,10 +111,10 @@ export default class Display {
 		if (validatePlace(place, this.size)) {
 			if (value.length > 1) { // Check if is more than 1 pixel.
 				for (let i: number = 0; i < value.length; i++) {
-					this.display[Math.round(place.y) - 1][(Math.round(place.x) - 1) + i] = generateDisplayablePixel(this.currentBgColor, color_, value[i]);
+					this.display[Math.round(place.y)][Math.round(place.x) + i] = generateDisplayablePixel(this.currentBgColor, color_, value[i]);
 				}
 			} else {
-				this.display[Math.round(place.y) - 1][Math.round(place.x) - 1] = generateDisplayablePixel(this.currentBgColor, color_, value);
+				this.display[Math.round(place.y)][Math.round(place.x)] = generateDisplayablePixel(this.currentBgColor, color_, value);
 			}
 
 			if (!noSave) {

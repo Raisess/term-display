@@ -65,6 +65,34 @@ display.clear();
 display.show(); // Shows a blank display.
 ```
 
+##### 🗺️  Map coordinates
+
+```ts
+display.setPixel({ x: 10, y: 3 }, "O", COLOR.blue);
+```
+
+On display:
+
+```shell
+  1
+  --------------------------
+1|..........................
+ |..........................
+ |.........O................
+ |..........................
+ |..........................
+ |..........................
+ |..........................
+ |..........................
+ |..........................
+
+axis:
+	x -
+	y |
+```
+
+The display pixels starts to count by **1**.
+
 #### 🔨 Getting and cleaning specific pixels
 
 ```ts

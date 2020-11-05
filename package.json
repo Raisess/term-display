@@ -1,6 +1,6 @@
 {
   "name": "term-display",
-	"version": "1.1.1",
+	"version": "1.2.1",
   "description": "Terminal display lib.",
   "main": "./dist/Display.js",
   "scripts": {
