@@ -125,7 +125,7 @@ export default class Display {
 					},
 					idx:       this.pixels.length,
 					value:     value,
-					color:     color,
+					color:     color_,
 					size:      value.length,
 					isCompost: value.length > 1 ? true : false
 				});
