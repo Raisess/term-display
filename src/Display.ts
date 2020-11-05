@@ -1,10 +1,12 @@
 import validatePlace from "./modules/validatePlace";
 import generateDisplayablePixel from "./modules/generateDisplayablePixel";
+import getColor from "./modules/getColor";
 
 // interfaces
 import { ISize } from "./interfaces/ISize";
 import { IPlace } from "./interfaces/IPlace";
 import { IPixel } from "./interfaces/IPixel";
+import { IColor } from "./interfaces/IColor";
 
 // data
 import { colors } from "./data/colors";
@@ -90,7 +92,7 @@ export default class Display {
 		this.clear(false);
 		
 		for (let pixel of this.pixels) {
-			this.setPixel(pixel.place, pixel.value, pixel.color, true);
+			this.setPixel(pixel.place, pixel.value, pixel.color.value, true);
 		}
 	}
 
@@ -106,8 +108,8 @@ export default class Display {
 	 *  color?: number; // Color of the pixel (optional, default is white \x1b[0m).
 	 * }
 	 */
-	public setPixel(place: IPlace, value: string, color?: number, noSave: boolean = false): void {
-		const color_: number = color ? color : 0;
+	public setPixel(place: IPlace, value: string, color: number = 0, noSave: boolean = false): void {
+		const color_: number = getColor(color).value !== -1 ? getColor(color).value : 37;
 
 		if (validatePlace(place, this.size)) {
 			if (value.length > 1) { // Check if is more than 1 pixel.
@@ -126,7 +128,7 @@ export default class Display {
 					},
 					idx:       this.pixels.length,
 					value:     value,
-					color:     color_,
+					color:     getColor(color),
 					size:      value.length,
 					isCompost: value.length > 1 ? true : false
 				});
@@ -177,7 +179,7 @@ export default class Display {
 				this.clear(false);
 				
 				for (let pix of this.pixels) {
-					if (pix) this.setPixel(pix.place, pix.value, pix.color, true);
+					if (pix) this.setPixel(pix.place, pix.value, pix.color.value, true);
 				}
 			}
 		}
