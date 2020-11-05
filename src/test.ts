@@ -7,7 +7,7 @@ const window: any = {
 
 console.log(window);
 
-const display: Display = new Display({ x: window.width, y: window.height }, ".");
+const display: Display = new Display(window, ".");
 
 const title: string = "center title asdfghjkl";
 

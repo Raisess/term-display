@@ -2,6 +2,7 @@ import validatePlace from "./modules/validatePlace";
 import generateDisplayablePixel from "./modules/generateDisplayablePixel";
 
 // interfaces
+import { ISize } from "./interfaces/ISize";
 import { IPlace } from "./interfaces/IPlace";
 import { IPixel } from "./interfaces/IPixel";
 
@@ -22,9 +23,9 @@ export default class Display {
 	public  pixels:  Array<IPixel>        = [];
 
 	// Display size.
-	private size: IPlace = {
-		x: 0,
-		y: 0
+	private size: ISize = {
+		width:  0,
+		height: 0
 	};
 	// No set pixel mark.
 	private whiteSpace: string = "x";
@@ -34,23 +35,23 @@ export default class Display {
 	/**
 	 * @param: {
 	 *  size: {              // Size of display.
-	 *    x: number;
-	 *    y: number;
+	 *    width:  number;
+	 *    height: number;
 	 *  },
 	 *  whiteSpace?: string; // White space mark (optional).
 	 * }
 	 */
-	constructor(size: IPlace, whiteSpace?: string) {
-		this.size.x     = Math.round(size.x);
-		this.size.y     = Math.round(size.y);
-		this.whiteSpace = whiteSpace ? whiteSpace : this.whiteSpace;
+	constructor(size: ISize, whiteSpace?: string) {
+		this.size.width  = Math.round(size.width);
+		this.size.height = Math.round(size.height);
+		this.whiteSpace  = whiteSpace ? whiteSpace : this.whiteSpace;
 
 		this.clear(); // Creates the window.
 	}
 
 	// Show display.
 	public show(): void {
-		for (let i: number = 0; i < this.size.y; i++) {
+		for (let i: number = 0; i < this.size.height; i++) {
 			console.log(this.display[i].join(""));
 		}
 	}
@@ -62,10 +63,10 @@ export default class Display {
 	 * }
 	 */
 	public clear(clearPixelsMem: boolean = true): void {
-		for (let i: number = 0; i < this.size.y; i++) {
+		for (let i: number = 0; i < this.size.height; i++) {
 			this.display[i] = [];
 			
-			for (let j: number = 0; j < this.size.x; j++) {
+			for (let j: number = 0; j < this.size.width; j++) {
 				if (this.currentBgColor !== 0) {
 					this.display[i][j] = generateDisplayablePixel(this.currentBgColor, this.currentBgColor - 10, this.whiteSpace);
 				} else {

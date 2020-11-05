@@ -31,8 +31,8 @@ You need to use that, because the lib compiles to Javascript when installed.
 import Display, { COLOR, BG_COLOR } from "term-display";
 
 const windowSize: any = {
-	x: 100,
-	y: 30
+	width:  100,
+	height: 30
 };
 
 // Instacing the display.
@@ -125,8 +125,8 @@ display.clearPixel({ x: 10, y: 3 });
 import Display, { TERM_WIDTH, TERM_HEIGHT } from "term-display";
 
 const windowSize: any = {
-	x: TERM_WIDTH,
-	y: TERM_HEIGHT
+	width:  TERM_WIDTH,
+	height: TERM_HEIGHT
 };
 
 const display: any = new Display(windowSize);
