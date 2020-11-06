@@ -147,15 +147,19 @@ export default class Display {
 	 * @returns: IPixel || undefined;
 	 */
 	public getPixel(place: IPlace): IPixel | undefined {
-		if (validatePlace(place, this.size)) {
-			for (let pixel of this.pixels) {
-				if(pixel) { // When clear, pixel is setted to undefined.
-					if (Math.round(place.x) === pixel.place.x && Math.round(place.y) === pixel.place.y) {
-						return pixel;
+		try {
+			if (validatePlace(place, this.size)) {
+				for (let pixel of this.pixels) {
+					if(pixel) { // When clear, pixel is setted to undefined.
+						if (Math.round(place.x) === pixel.place.x && Math.round(place.y) === pixel.place.y) {
+							return pixel;
+						}
 					}
 				}
-			}
 
+				return undefined;
+			}
+		} catch(e) {
 			return undefined;
 		}
 	}

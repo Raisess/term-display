@@ -107,6 +107,7 @@ The display pixels starts to count by **1**.
  */
 console.log(display.getPixel({ x: 10, y: 3 }));
 // logs "{ place: { x: 10, y: 3 }, value: "X", color: { name: "blue", value: 34, type: "PX" }, compost: false }".
+// if pixel don't exist's return undefined.
 
 // Cleaning a pixel
 /**
