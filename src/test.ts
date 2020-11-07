@@ -39,5 +39,5 @@ display.clearPixel({ x: 50, y: 15 });
 console.log(display.pixels);
 
 display.show();
-display.clear();
+display.clear(false);
 

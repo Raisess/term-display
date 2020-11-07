@@ -60,6 +60,12 @@ display.setBgColor(BG_COLOR.white);
 display.show();
 
 // Clear all pixels on memory.
+/**
+ * @param: {
+ *  clearConsole:   boolean; // Clear the console data.
+ *  clearPixelsMem: boolean; // Clear pixels in memory.
+ * }
+ */
 display.clear();
 
 display.show(); // Shows a blank display.

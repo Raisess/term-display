@@ -47,7 +47,7 @@ export default class Display {
 		this.size.height = Math.round(size.height);
 		this.whiteSpace  = whiteSpace ? whiteSpace : this.whiteSpace;
 
-		this.clear(); // Creates the window.
+		this.clear(false); // Creates the window.
 	}
 
 	// Show display.
@@ -60,10 +60,11 @@ export default class Display {
 	// Clear all display pixels.
 	/**
 	 * @param: {
+	 *  clearConsole:   boolean; // Clear console data.
 	 *  clearPixelsMem: boolean; // If is it false, the pixels memory is not cleared, just only display memory is cleared.
 	 * }
 	 */
-	public clear(clearPixelsMem: boolean = true): void {
+	public clear(clearConsole: boolean = true, clearPixelsMem: boolean = true): void {
 		for (let i: number = 0; i < this.size.height; i++) {
 			this.display[i] = [];
 			
@@ -76,6 +77,7 @@ export default class Display {
 			}
 		}
 
+		if (clearConsole) console.clear();
 		if (clearPixelsMem) this.pixels = [];
 	}
 
@@ -88,7 +90,7 @@ export default class Display {
 	public setBgColor(color: number): void {
 		this.currentBgColor = color;
 
-		this.clear(false);
+		this.clear(false, false);
 		
 		for (let pixel of this.pixels) {
 			this.setPixel(pixel.place, pixel.value, pixel.color.value, true);
@@ -179,7 +181,7 @@ export default class Display {
 			if (pixel) {
 				delete this.pixels[pixel.idx];
 				
-				this.clear(false);
+				this.clear(false, false);
 				
 				for (let pix of this.pixels) {
 					if (pix) this.setPixel(pix.place, pix.value, pix.color.value, true);
