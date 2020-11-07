@@ -6,7 +6,6 @@ import getColor from "./modules/getColor";
 import { ISize } from "./interfaces/ISize";
 import { IPlace } from "./interfaces/IPlace";
 import { IPixel } from "./interfaces/IPixel";
-import { IColor } from "./interfaces/IColor";
 
 // data
 import { colors } from "./data/colors";
