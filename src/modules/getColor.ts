@@ -3,14 +3,13 @@ import { IColor } from "../interfaces/IColor";
 import { colors } from "../data/colors";
 
 export default function getColor(colorValue: number): IColor {
-	const colorNames:  Array<[string, unknown]> = Object.entries(colors);
-	const colorValues: Array<number> = Object.values(colors);
+	const colorTuples:  Array<[string, number]> = Object.entries(colors);
 
-	for (let i: number = 0; i < colorValues.length; i++) {
-		if (colorValue === colorValues[i]) {
+	for (let i: number = 0; i < colorTuples.length; i++) {
+		if (colorValue === colorTuples[i][1]) {
 			return {
-				name:  colorNames[i][0],
-				value: colorValues[i],
+				name:  colorTuples[i][0],
+				value: colorTuples[i][1],
 				type:  "PX"
 			};
 		}

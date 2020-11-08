@@ -51,7 +51,7 @@ const anim: any = setInterval(() => {
 	display.clear();
 	
 	for (let j: number = 0; j < pixel.length; j++) {
-	display.setPixel({
+		display.setPixel({
 			x: i === size.width - 1 ? pixel[j].x = size.width - (pixel[j].value.length - (pixel[j].value.length - (pixel[j].value.length - 1))) : pixel[j].x + i,
 			y: pixel[j].y
 		}, pixel[j].value, pixel[j].color);

@@ -47,7 +47,7 @@ export default class Display {
 		this.size.height = Math.round(size.height);
 		this.whiteSpace  = whiteSpace ? whiteSpace : this.whiteSpace;
 
-		this.clear(false); // Creates the window.
+		this.clear(); // Creates the window.
 	}
 
 	// Show display.
